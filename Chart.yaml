@@ -1,0 +1,6 @@
+apiVersion: v2
+name: notes-app
+description: Notes app (Spring Boot API + Angular UI) for OpenShift
+type: application
+version: 0.1.0
+appVersion: "0.0.1"

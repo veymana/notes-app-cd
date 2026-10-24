@@ -1,0 +1,37 @@
+# Docker Hub namespace (your Docker Hub username or org)
+dockerhubNamespace: ""
+api:
+  # Service name must stay "notes-api": the UI's nginx proxies /api/ to http://notes-api:8080
+  image:
+    repository: notes-api
+    tag: latest          # prefer an immutable tag, e.g. sha-a1b2c3d or 26102411
+    pullPolicy: IfNotPresent
+  replicas: 1
+  port: 8080
+  resources:
+    requests: { cpu: 100m, memory: 384Mi }
+    limits: { cpu: 500m, memory: 768Mi }
+ui:
+  image:
+    repository: notes-ui
+    tag: latest
+    pullPolicy: IfNotPresent
+  replicas: 1
+  port: 8080
+  resources:
+    requests: { cpu: 50m, memory: 64Mi }
+    limits: { cpu: 200m, memory: 128Mi }
+db:
+  # JDBC URL of the existing PostgreSQL service
+  url: jdbc:postgresql://notes-db:5432/notesdb
+  # Option A: let the chart create the Secret (pass the password with --set db.password=...)
+  username: notes
+  password: ""
+  # Option B: use a Secret you already created (needs SPRING_DATASOURCE_USERNAME / _PASSWORD keys)
+  existingSecret: ""
+route:
+  enabled: true
+  host: ""               # empty = OpenShift generates one
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect

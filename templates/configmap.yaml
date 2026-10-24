@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: notes-api-config
+  labels:
+    app: notes-api
+data:
+  SPRING_DATASOURCE_URL: {{ .Values.db.url | quote }}
+  SPRING_PROFILES_ACTIVE: prod

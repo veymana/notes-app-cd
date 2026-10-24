@@ -1,0 +1,3 @@
+*.tgz
+secrets*.yaml
+.idea/

@@ -1,0 +1,3 @@
+notes-app deployed.
+Get the URL:
+  oc get route notes-ui -o jsonpath='{.spec.host}'
